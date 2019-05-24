@@ -1,6 +1,7 @@
 let siteBox = document.querySelector('.maravilhosas__box');
 
 fetch('http://localhost:5001/maravilhosas')
+
 .then((response)=>{
     return response.json();
 })
@@ -17,8 +18,12 @@ fetch('http://localhost:5001/maravilhosas')
         const nome = document.createElement('p');
         nome.textContent = personalidade.title;
 
-            let perfil= document.createElement('div');
-            perfil.setAttribute('class','maravilhosas__perfil')
+        let perfil= document.createElement('div');
+        perfil.setAttribute('class','maravilhosas__perfil')
+
+                
+        const botao = document.createElement('button');
+        botao.textContent = ("deletar");
 
             const foto = document.createElement('img');
             foto.setAttribute('class', 'img-responsive');
