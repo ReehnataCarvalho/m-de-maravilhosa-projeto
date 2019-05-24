@@ -53,45 +53,46 @@ fetch('http://localhost:5001/maravilhosas')
 
 })
 
-const button = document.getElementById('send_form')
+var button = document.getElementById('send_form')
 
 button.addEventListener('click', (evento) => {
-    console.log("oi")
     evento.preventDefault();
 
-    const nomeForm = document.getElementByName('nome').value;
-
-    let urlForm = document.getElementByName('imagem').value;
+    let nomeForm = document.getElementById('nome').value;
+    let urlForm = document.getElementById('imagem').value;
     
+    console.log(nomeForm);
+    console.log(urlForm);
+
 
     fetch('http://localhost:5001/maravilhosas',{
         method: "POST",
         headers:{
-            'Accept': 'application/json', 'Conten-Type': 'application/json'
+            'Accept': 'application/json', 
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify({
             'title': nomeForm,
-            'metadata.image': urlForm,
+            'metadata': { 'image': { 'url': 
+                urlForm 
+            }}
         })
     })
 
     .then((response)=>{
-
         return response.json();
-
     })
 
     .then((data)=>{
 
-        console.log(data);
-        document.getElementById('message').textContent = ('Sucesso !! ')
-        
+        console.log('sucesso')    
     })
     .catch((erro)=>{
 
         console.log(erro)
     })
 
+    window.location.reload(true) // nesta linha eu estou dizendo ao navegador que ele recarregue automaticamente quando eu fizer meu post na API
+
 
 })
-
