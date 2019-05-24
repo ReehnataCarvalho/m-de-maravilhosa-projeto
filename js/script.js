@@ -25,28 +25,25 @@ fetch('http://localhost:5001/maravilhosas')
         const botao = document.createElement('button');
         botao.textContent = ("deletar");
 
-            const foto = document.createElement('img');
-            foto.setAttribute('class', 'img-responsive');
+        const foto = document.createElement('img');
+        foto.setAttribute('class', 'img-responsive');
 
-            if(personalidade.metadata && personalidade.metadata.image){
+            if(personalidade.metadata && personalidade.metadata.image && personalidade.metadata.image.url != ""){
 
                 foto.src = personalidade.metadata.image.url;
                 
             }else{
 
-                // foto.setAttribute('src','./img/img-mulher.png');
                 foto.src = ('./img/img-mulher.png');
-
         
             }
-                
-            siteBox.appendChild(perfil);
-            perfil.appendChild(link);        
-            link.appendChild(foto);
-            link.appendChild(nome);
 
-    console.log('sucesso');      
-    
+
+            siteBox.appendChild(perfil);
+            perfil.appendChild(link);  
+            perfil.appendChild(botao);      
+            link.appendChild(foto);
+            link.appendChild(nome);    
 });
 
 })
