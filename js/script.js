@@ -19,11 +19,36 @@ fetch('http://localhost:5001/maravilhosas')
         nome.textContent = personalidade.title;
 
         let perfil= document.createElement('div');
-        perfil.setAttribute('class','maravilhosas__perfil')
+        perfil.setAttribute('class','maravilhosas__perfil');
 
                 
-        const botao = document.createElement('button');
-        botao.textContent = ("deletar");
+        const botaoDelete = document.createElement('button');
+        botaoDelete.textContent = ("deletar");
+
+        
+        botaoDelete.addEventListener('click', () => {
+
+            const cardFilho = botaoDelete.parentElement;
+            const cardPai = cardFilho.parentElement;
+
+         fetch('http://localhost:5001/maravilhosas' + personalidade.id,{
+        
+             method: "DELETE",
+             headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },             
+        })
+        .then(()=>{
+            cardPai.removeChild(cardFilho)
+
+        })
+        .catch((erro)=>{
+            console.log(erro)
+
+        })
+
+        })
 
         const foto = document.createElement('img');
         foto.setAttribute('class', 'img-responsive');
@@ -37,13 +62,11 @@ fetch('http://localhost:5001/maravilhosas')
                 foto.src = ('./img/img-mulher.png');
         
             }
-
-
             siteBox.appendChild(perfil);
             perfil.appendChild(link);  
-            perfil.appendChild(botao);      
             link.appendChild(foto);
-            link.appendChild(nome);    
+            link.appendChild(nome);   
+            perfil.appendChild(botaoDelete);       
 });
 
 })
@@ -53,9 +76,9 @@ fetch('http://localhost:5001/maravilhosas')
 
 })
 
-var button = document.getElementById('send_form')
+var botaoForm = document.getElementById('send_form')
 
-button.addEventListener('click', (evento) => {
+botaoForm.addEventListener('click', (evento) => {
     evento.preventDefault();
 
     let nomeForm = document.getElementById('nome').value;
@@ -65,7 +88,7 @@ button.addEventListener('click', (evento) => {
     console.log(urlForm);
 
 
-    fetch('http://localhost:5001/maravilhosas',{
+    fetch('http://localhost:5001/maravilhosas/',{
         method: "POST",
         headers:{
             'Accept': 'application/json', 
